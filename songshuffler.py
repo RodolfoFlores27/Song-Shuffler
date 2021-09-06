@@ -12,9 +12,9 @@ songlist = os.listdir(directory)
 def get_random_nums():
     numlist = []
     for num in range(1, len(songlist)+1):
-        mylist.append(num)
+        numlist.append(num)
 
-    random.shuffle(mylist)
+    random.shuffle(numlist)
     return numlist
 
 def rename_songs():
