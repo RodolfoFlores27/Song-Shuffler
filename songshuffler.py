@@ -3,23 +3,24 @@ import random
 import eyed3
 
 #put directory where your songs are located
-directory = 'C:\\Users\\Some_User\\Desktop\\Songs'
-
-#puts all files in the directory in a list
-songlist = os.listdir(directory)
+directory = r'C:\Users\username\Desktop\Songs'
+os.chdir(directory)
 
 #generate random numbers to pair with song titles
 def get_random_nums():
     numlist = []
-    for num in range(1, len(songlist)+1):
+    for num in range(1, len(os.listdir(directory))+1):
         numlist.append(num)
 
     random.shuffle(numlist)
     return numlist
 
-def rename_songs():
-    for num, song in zip(random_nums, songlist):
-        audio = eyed3.load('C:\\Users\\compa\\Some_User\\Songs\\' + song)
+def rename_songs(nums):
+    #puts all files in the directory in a list
+    songlist = os.listdir(directory)
+    
+    for num, song in zip(nums, songlist):
+        audio = eyed3.load(directory + '\\' + song)
         src = song
         dst = str(num) + '_' + audio.tag.title + '.mp3'
 
@@ -28,5 +29,5 @@ def rename_songs():
         os.rename(src, dst)
 
 if __name__ == "__main__":
-	random_nums = get_random_nums()
-	rename_songs()
+    random_nums = get_random_nums()
+    rename_songs(random_nums)
